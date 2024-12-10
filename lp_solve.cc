@@ -2805,28 +2805,28 @@ info.GetReturnValue().Set(Nan::New<Boolean>(ret == 1));
 */
 NAN_METHOD(LinearProgram::get_sensitivity_rhs) {
 	if (info.Length() != 3) return Nan::ThrowError("Invalid number of arguments");
-	if (!(info[0]->IsArray() || info[0]->IsNull())) return Nan::ThrowTypeError("First argument should be a Array of Numbers or NULL");
-	if (!(info[1]->IsArray() || info[1]->IsNull())) return Nan::ThrowTypeError("Second argument should be a Array of Numbers or NULL");
-	if (!(info[2]->IsArray() || info[2]->IsNull())) return Nan::ThrowTypeError("Third argument should be a Array of Numbers or NULL");
+	if (!(info[0]->IsArray())) return Nan::ThrowTypeError("First argument should be a Array of Numbers or NULL");
+	if (!(info[1]->IsArray())) return Nan::ThrowTypeError("Second argument should be a Array of Numbers or NULL");
+	if (!(info[2]->IsArray())) return Nan::ThrowTypeError("Third argument should be a Array of Numbers or NULL");
 	REAL* duals = NULL;
+	Local<Array> duals_handle = Local<Array>::Cast(info[0]);
 	if (info[0]->IsArray()) {
-		Local<Array> duals_handle = Local<Array>::Cast(info[0]);
 		int duals_n = duals_handle->Length();
 		duals = new REAL[duals_n];
 		for (int i = 0; i < duals_n; i++)
 			duals[i] = Nan::To<double>(Nan::Get(duals_handle, i).ToLocalChecked()).ToChecked();
 	}
 	REAL* dualsfrom = NULL;
+	Local<Array> dualsfrom_handle = Local<Array>::Cast(info[1]);
 	if (info[1]->IsArray()) {
-		Local<Array> dualsfrom_handle = Local<Array>::Cast(info[1]);
 		int dualsfrom_n = dualsfrom_handle->Length();
 		dualsfrom = new REAL[dualsfrom_n];
 		for (int i = 0; i < dualsfrom_n; i++)
 			dualsfrom[i] = Nan::To<double>(Nan::Get(dualsfrom_handle, i).ToLocalChecked()).ToChecked();
 	}
 	REAL* dualstill = NULL;
+	Local<Array> dualstill_handle = Local<Array>::Cast(info[2]);
 	if (info[2]->IsArray()) {
-		Local<Array> dualstill_handle = Local<Array>::Cast(info[2]);
 		int dualstill_n = dualstill_handle->Length();
 		dualstill = new REAL[dualstill_n];
 		for (int i = 0; i < dualstill_n; i++)
@@ -2835,21 +2835,18 @@ NAN_METHOD(LinearProgram::get_sensitivity_rhs) {
 	LinearProgram* obj = Nan::ObjectWrap::Unwrap<LinearProgram>(info.This());
 	MYBOOL ret = ::get_sensitivity_rhs(obj->lp, duals, dualsfrom, dualstill);
 	if (info[0]->IsArray()) {
-		Local<Array> duals_handle = Local<Array>::Cast(info[0]);
 		int duals_n = duals_handle->Length();
 		for (int i = 0; i < duals_n; i++)
 			Nan::Set(duals_handle, i, Nan::New<Number>(duals[i]));
 		delete[] duals;
 	}
 	if (info[1]->IsArray()) {
-		Local<Array> dualsfrom_handle = Local<Array>::Cast(info[1]);
 		int dualsfrom_n = dualsfrom_handle->Length();
 		for (int i = 0; i < dualsfrom_n; i++)
 			Nan::Set(dualsfrom_handle, i, Nan::New<Number>(dualsfrom[i]));
 		delete[] dualsfrom;
 	}
 	if (info[2]->IsArray()) {
-		Local<Array> dualstill_handle = Local<Array>::Cast(info[2]);
 		int dualstill_n = dualstill_handle->Length();
 		for (int i = 0; i < dualstill_n; i++)
 			Nan::Set(dualstill_handle, i, Nan::New<Number>(dualstill[i]));
