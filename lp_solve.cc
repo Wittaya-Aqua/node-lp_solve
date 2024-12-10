@@ -2880,6 +2880,10 @@ NAN_METHOD(LinearProgram::get_sensitivity_obj) {
 	LinearProgram* obj = Nan::ObjectWrap::Unwrap<LinearProgram>(info.This());
 	MYBOOL ret = ::get_sensitivity_obj(obj->lp, objfrom, objtill);
 	if (info[0]->IsArray()) {
+		Local<Array> objfrom_handle = Local<Array>::Cast(info[0]);
+		int objfrom_n = objfrom_handle->Length();
+		for (int i = 0; i < objfrom_n; i++)
+			Nan::Set(objfrom_handle, i, Nan::New<Number>(objfrom[i]));
 		delete[] objfrom;
 	}
 	if (info[1]->IsArray()) {
