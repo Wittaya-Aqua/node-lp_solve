@@ -2837,7 +2837,6 @@ NAN_METHOD(LinearProgram::get_sensitivity_rhs) {
 	if (info[0]->IsArray()) {
 		Local<Array> duals_handle = Local<Array>::Cast(info[0]);
 		int duals_n = duals_handle->Length();
-		duals = new REAL[duals_n];
 		for (int i = 0; i < duals_n; i++)
 			Nan::Set(duals_handle, i, Nan::New<Number>(duals[i]));
 		delete[] duals;
@@ -2845,7 +2844,6 @@ NAN_METHOD(LinearProgram::get_sensitivity_rhs) {
 	if (info[1]->IsArray()) {
 		Local<Array> dualsfrom_handle = Local<Array>::Cast(info[1]);
 		int dualsfrom_n = dualsfrom_handle->Length();
-		dualsfrom = new REAL[dualsfrom_n];
 		for (int i = 0; i < dualsfrom_n; i++)
 			Nan::Set(dualsfrom_handle, i, Nan::New<Number>(dualsfrom[i]));
 		delete[] dualsfrom;
@@ -2853,7 +2851,6 @@ NAN_METHOD(LinearProgram::get_sensitivity_rhs) {
 	if (info[2]->IsArray()) {
 		Local<Array> dualstill_handle = Local<Array>::Cast(info[2]);
 		int dualstill_n = dualstill_handle->Length();
-		dualstill = new REAL[dualstill_n];
 		for (int i = 0; i < dualstill_n; i++)
 			Nan::Set(dualstill_handle, i, Nan::New<Number>(dualstill[i]));
 		delete[] dualstill;
@@ -2904,7 +2901,6 @@ NAN_METHOD(LinearProgram::get_sensitivity_obj) {
 	if (info[1]->IsArray()) {
 		Local<Array> objtill_handle = Local<Array>::Cast(info[1]);
 		int objtill_n = objtill_handle->Length();
-		objtill = new REAL[objtill_n];
 		for (int i = 0; i < objtill_n; i++)
 			Nan::Set(objtill_handle, i, Nan::New<Number>(objtill[i]));
 		delete[] objtill;
@@ -2954,7 +2950,6 @@ NAN_METHOD(LinearProgram::get_sensitivity_objex) {
 	if (info[0]->IsArray()) {
 		Local<Array> objfrom_handle = Local<Array>::Cast(info[0]);
 		int objfrom_n = objfrom_handle->Length();
-		objfrom = new REAL[objfrom_n];
 		for (int i = 0; i < objfrom_n; i++)
 			Nan::Set(objfrom_handle, i, Nan::New<Number>(objfrom[i]));
 		delete[] objfrom;
@@ -2962,7 +2957,6 @@ NAN_METHOD(LinearProgram::get_sensitivity_objex) {
 	if (info[1]->IsArray()) {
 		Local<Array> objtill_handle = Local<Array>::Cast(info[1]);
 		int objtill_n = objtill_handle->Length();
-		objtill = new REAL[objtill_n];
 		for (int i = 0; i < objtill_n; i++)
 			Nan::Set(objtill_handle, i, Nan::New<Number>(objtill[i]));
 		delete[] objtill;
@@ -2970,7 +2964,6 @@ NAN_METHOD(LinearProgram::get_sensitivity_objex) {
 	if (info[2]->IsArray()) {
 		Local<Array> objfromvalue_handle = Local<Array>::Cast(info[2]);
 		int objfromvalue_n = objfromvalue_handle->Length();
-		objfromvalue = new REAL[objfromvalue_n];
 		for (int i = 0; i < objfromvalue_n; i++)
 			Nan::Set(objfromvalue_handle, i, Nan::New<Number>(objfromvalue[i]));
 		delete[] objfromvalue;
@@ -2978,7 +2971,6 @@ NAN_METHOD(LinearProgram::get_sensitivity_objex) {
 	if (info[3]->IsArray()) {
 		Local<Array> objtillvalue_handle = Local<Array>::Cast(info[3]);
 		int objtillvalue_n = objtillvalue_handle->Length();
-		objtillvalue = new REAL[objtillvalue_n];
 		for (int i = 0; i < objtillvalue_n; i++)
 			Nan::Set(objtillvalue_handle, i, Nan::New<Number>(objtillvalue[i]));
 		delete[] objtillvalue;
